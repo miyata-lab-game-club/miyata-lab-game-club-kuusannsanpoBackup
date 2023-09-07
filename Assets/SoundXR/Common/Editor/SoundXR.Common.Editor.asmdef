@@ -1,0 +1,18 @@
+{
+    "name": "SoundXR.Common.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bdee4a0b89d9d55468ef72cb2fad3b81"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,16 @@
+{
+    "name": "SampleAsmdef",
+    "rootNamespace": "",
+    "references": [
+        "GUID:af8397095d36ec64e9d26eadc92b3e44"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
