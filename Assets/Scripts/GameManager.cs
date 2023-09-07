@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        isPlaying = true;
         gameTimer = 0;
+        isPlaying = true;
     }
 
     // Update is called once per frame
@@ -46,5 +46,6 @@ public class GameManager : MonoBehaviour
             windManager.SetActiveGameEndPanel();
             isPlaying = false;
         }
+        Debug.Log(gameTimer);
     }
 }
