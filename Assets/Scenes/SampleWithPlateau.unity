@@ -1668,7 +1668,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619087832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
+  m_LocalPosition: {x: 43586, y: 22019, z: -55206.883}
+=======
   m_LocalPosition: {x: 43218, y: 21815, z: -55206.883}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 136, y: 136, z: 136}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5440,7 +5444,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956996833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5450,8 +5454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.530304}
-  m_SizeDelta: {x: 0, y: -397.8665}
+  m_AnchoredPosition: {x: 0, y: 201.26833}
+  m_SizeDelta: {x: 0, y: -402.5367}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956996835
 MonoBehaviour:
