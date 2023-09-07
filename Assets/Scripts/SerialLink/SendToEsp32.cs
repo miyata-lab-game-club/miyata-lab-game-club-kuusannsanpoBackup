@@ -17,10 +17,10 @@ public class SendToEsp32 : MonoBehaviour
     private int RB_UnderCap;
     private int LB_UnderCap;
 
-    private int LF_AboveCap;
-    private int RF_AboveCap;
+    private int LF_AboveCap = 4;
+    private int RF_AboveCap = 4;
     private int RB_AboveCap = 4;
-    private int LB_AboveCap;
+    private int LB_AboveCap = 4;
 
     // ABOVE:全開
     private const int ABOVE_FULL＿OPEN = 4;
@@ -91,15 +91,14 @@ public class SendToEsp32 : MonoBehaviour
 
                 // 力覚装置1~4s用に文字型に変換(引っ張る力と急上昇を送信)
                 //1つめにAbove, 2つめにUnder
-                LF_Data = LF_UnderCap.ToString() + windBoostedRise;
-                RF_Data = RF_UnderCap.ToString() + windBoostedRise;
-                //RB_Data = RB_UnderCap.ToString() + windBoostedRise.ToString();
-                string tmpString = RB_AboveCap.ToString();
-                Debug.Log(RB_AboveCap.ToString() + "型" + RB_AboveCap.ToString().GetType());
+                LF_Data = LF_AboveCap.ToString() + LF_UnderCap.ToString() + windBoostedRise;
+                RF_Data = RF_AboveCap.ToString() + RF_UnderCap.ToString() + windBoostedRise;
+                //string tmpString = RB_AboveCap.ToString();
+                //Debug.Log(RB_AboveCap.ToString() + "型" + RB_AboveCap.ToString().GetType());
                 //RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString();
-                RB_Data = RB_AboveCap.ToString() + RF_UnderCap.ToString() + windBoostedRise;
+                RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString() + windBoostedRise;
                 Debug.Log("RB_Data: " + RB_Data);
-                LB_Data = LB_UnderCap.ToString() + LB_AboveCap.ToString() + windBoostedRise;
+                LB_Data = LB_AboveCap.ToString() + LB_UnderCap.ToString() + windBoostedRise;
 
                 NF_Data = windManager.currentWindIndex.ToString() + windBoostedRise;
                 SetPortIndices(windManager);
@@ -188,6 +187,8 @@ public class SendToEsp32 : MonoBehaviour
     // ABOVE:全閉じ
     private const int ABOVE_CLOSE = 4;
         */
+
+        Debug.Log(windManager.isMatchingFinal);
         if (windManager.isMatchingFinal == true)
         {
             if (LF_UnderCap == UNDER_FULL＿OPEN)
@@ -205,7 +206,7 @@ public class SendToEsp32 : MonoBehaviour
             }
             if (LB_UnderCap == UNDER_FULL＿OPEN)
             {
-                LF_AboveCap = ABOVE_CLOSE;
+                LB_AboveCap = ABOVE_CLOSE;
             }
         }
         else
@@ -225,7 +226,7 @@ public class SendToEsp32 : MonoBehaviour
             }
             if (LB_UnderCap == UNDER_FULL＿OPEN)
             {
-                LF_AboveCap = ABOVE_FULL＿OPEN;
+                LB_AboveCap = ABOVE_FULL＿OPEN;
             }
         }
         /*

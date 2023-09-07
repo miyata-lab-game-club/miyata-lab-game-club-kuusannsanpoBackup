@@ -982,9 +982,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LF_port: COM9
   RF_Port: COM6
-  RB_Port: COM8
-  LB_Port: COM5
-  NF_Port: COM7
+  RB_Port: COM5
+  LB_Port: COM8
+  NF_Port: COM3
   kasa_Port: COM4
   baudRate: 115200
 --- !u!114 &340929203
