@@ -248,7 +248,7 @@ public class WindManager : MonoBehaviour
                 // 上昇準備中と上昇中は操作を受け付けないようにする
                 if (sendToHardUpSignal == false)
                 {
-                    Debug.Log("操作を受け付ける");
+                    //Debug.Log("操作を受け付ける");
                     float similarity;
                     similarity = Vector3.Dot(rightControllerTilt.normalized, windXZDirection[currentWindIndex].normalized);
                     // 類似度が0.7よりおおきいとき

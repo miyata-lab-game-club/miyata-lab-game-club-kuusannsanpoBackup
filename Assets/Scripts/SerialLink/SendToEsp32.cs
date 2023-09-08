@@ -22,6 +22,8 @@ public class SendToEsp32 : MonoBehaviour
     private int RB_AboveCap = 4;
     private int LB_AboveCap = 4;
 
+    private bool sendAboveCapOpenSignalOnce = false;
+
     // ABOVE:全開
     private const int ABOVE_FULL＿OPEN = 4;
 
@@ -80,47 +82,95 @@ public class SendToEsp32 : MonoBehaviour
     // 0.5秒ずつ情報を送信　
     private IEnumerator SendDataCoroutine(SerialPortManager spManager, WindManager windManager)
     {
+        Debug.Log(GameManager.instance.gameTimer + "時間：状態" + GameManager.instance.isAblePlayingHard);
         while (true)  // 無限ループで送信処理を繰り返す
         {
-            try
+            // ハード側の準備ができていないとき
+            if (GameManager.instance.isAblePlayingHard == false)
             {
-                // windManager.upが真なら1、偽なら0を格納
-                windBoostedRise = windManager.up ? "a" : "b";
-                SetPortIndices(windManager);
-                SetUnderPortIndices(windManager);
+                // １回だけ信号を送る
+                if (sendAboveCapOpenSignalOnce == false)
+                {
+                    try
+                    {
+                        // windManager.upが真なら1、偽なら0を格納
+                        windBoostedRise = windManager.up ? "a" : "b";
+                        SetPortIndices(windManager);
+                        SetUnderPortIndices(windManager);
 
-                // 力覚装置1~4s用に文字型に変換(引っ張る力と急上昇を送信)
-                //1つめにAbove, 2つめにUnder
-                LF_Data = LF_AboveCap.ToString() + LF_UnderCap.ToString() + windBoostedRise;
-                RF_Data = RF_AboveCap.ToString() + RF_UnderCap.ToString() + windBoostedRise;
-                //string tmpString = RB_AboveCap.ToString();
-                //Debug.Log(RB_AboveCap.ToString() + "型" + RB_AboveCap.ToString().GetType());
-                //RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString();
-                RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString() + windBoostedRise;
-                Debug.Log("RB_Data: " + RB_Data);
-                LB_Data = LB_AboveCap.ToString() + LB_UnderCap.ToString() + windBoostedRise;
+                        // 力覚装置1~4s用に文字型に変換(引っ張る力と急上昇を送信)
+                        //1つめにAbove, 2つめにUnder
+                        // LF_Data = LF_AboveCap.ToString() + LF_UnderCap.ToString() + windBoostedRise;
+                        LF_Data = "4" + "1" + windBoostedRise;
+                        RF_Data = "4" + "1" + windBoostedRise;
+                        //string tmpString = RB_AboveCap.ToString();
+                        //Debug.Log(RB_AboveCap.ToString() + "型" + RB_AboveCap.ToString().GetType());
+                        //RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString();
+                        RB_Data = "4" + "1" + windBoostedRise;
+                        Debug.Log("RB_Data: " + RB_Data);
+                        LB_Data = "4" + "1" + windBoostedRise;
 
-                NF_Data = windManager.currentWindIndex.ToString() + windBoostedRise;
-                SetPortIndices(windManager);
-                SetUnderPortIndices(windManager);
-                // それぞれ送信
-                spManager.WriteToPort(0, LF_Data);//LFに送信
-                spManager.WriteToPort(1, RF_Data);//RFに送信
-                spManager.WriteToPort(2, RB_Data);//RBに送信
-                spManager.WriteToPort(3, LB_Data);//LBに送信
-                spManager.WriteToPort(4, NF_Data);//Neckfanに送信
+                        NF_Data = windManager.currentWindIndex.ToString() + windBoostedRise;
+                        //SetPortIndices(windManager);
+                        //SetUnderPortIndices(windManager);
+                        // それぞれ送信
+                        spManager.WriteToPort(0, LF_Data);//LFに送信
+                        spManager.WriteToPort(1, RF_Data);//RFに送信
+                        spManager.WriteToPort(2, RB_Data);//RBに送信
+                        spManager.WriteToPort(3, LB_Data);//LBに送信
+                        spManager.WriteToPort(4, NF_Data);//Neckfanに送信
 
-                // spManager.Read(5)の結果をデバッグログで表示
+                        // spManager.Read(5)の結果をデバッグログで表示
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError("Could not send to ESP32: " + ex.Message);
+                    }
+                }
+                sendAboveCapOpenSignalOnce = true;
             }
-            catch (Exception ex)
+            else
             {
-                Debug.LogError("Could not send to ESP32: " + ex.Message);
-            }
+                try
+                {
+                    // windManager.upが真なら1、偽なら0を格納
+                    windBoostedRise = windManager.up ? "a" : "b";
+                    SetPortIndices(windManager);
+                    SetUnderPortIndices(windManager);
 
-            yield return new WaitForSeconds(0.1f);  // 0.5秒待機
-            //spManager.WriteToPort(2, RB_AboveCap.ToString());//RBに送信
-            //yield return new WaitForSeconds(0.1f);  // 0.1秒待機
-            //spManager.WriteToPort(2, LF_AboveCap.ToString());//RBに送信
+                    // 力覚装置1~4s用に文字型に変換(引っ張る力と急上昇を送信)
+                    //1つめにAbove, 2つめにUnder
+                    LF_Data = LF_AboveCap.ToString() + LF_UnderCap.ToString() + windBoostedRise;
+                    RF_Data = RF_AboveCap.ToString() + RF_UnderCap.ToString() + windBoostedRise;
+                    //string tmpString = RB_AboveCap.ToString();
+                    //Debug.Log(RB_AboveCap.ToString() + "型" + RB_AboveCap.ToString().GetType());
+                    //RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString();
+                    RB_Data = RB_AboveCap.ToString() + RB_UnderCap.ToString() + windBoostedRise;
+                    Debug.Log("RB_Data: " + RB_Data);
+                    LB_Data = LB_AboveCap.ToString() + LB_UnderCap.ToString() + windBoostedRise;
+
+                    NF_Data = windManager.currentWindIndex.ToString() + windBoostedRise;
+                    SetPortIndices(windManager);
+                    SetUnderPortIndices(windManager);
+                    // それぞれ送信
+                    spManager.WriteToPort(0, LF_Data);//LFに送信
+                    spManager.WriteToPort(1, RF_Data);//RFに送信
+                    spManager.WriteToPort(2, RB_Data);//RBに送信
+                    spManager.WriteToPort(3, LB_Data);//LBに送信
+                    spManager.WriteToPort(4, NF_Data);//Neckfanに送信
+
+                    // spManager.Read(5)の結果をデバッグログで表示
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Could not send to ESP32: " + ex.Message);
+                }
+
+                yield return new WaitForSeconds(0.1f);  // 0.5秒待機
+                                                        //spManager.WriteToPort(2, RB_AboveCap.ToString());//RBに送信
+                                                        //yield return new WaitForSeconds(0.1f);  // 0.1秒待機
+                                                        //spManager.WriteToPort(2, LF_AboveCap.ToString());//RBに送信
+            }
         }
     }
 

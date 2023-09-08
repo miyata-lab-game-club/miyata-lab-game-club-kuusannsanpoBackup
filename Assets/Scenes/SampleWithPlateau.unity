@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windManager: {fileID: 475872097}
-  gameEndTime: 10
+  gameEndTime: 180
   isPlaying: 0
 --- !u!4 &193369114
 Transform:
@@ -1304,7 +1304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475872090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: 117.1, z: -251.2}
+  m_LocalPosition: {x: 44, y: 249, z: -251.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1379,7 +1379,7 @@ MonoBehaviour:
   - {fileID: 1389707959}
   upHeight: 130
   startUpHeight: 110
-  windCicleTime: 10
+  windCicleTime: 20
   similarityStandard: 0.6
   windPivot: {fileID: 933590742}
   ReceiveFromEsp32: {fileID: 340929201}
@@ -4618,7 +4618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 292}
+  m_AnchoredPosition: {x: 0, y: 423.9}
   m_SizeDelta: {x: 733, y: 452}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1729209550
